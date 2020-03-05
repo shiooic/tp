@@ -12,9 +12,16 @@ class Order extends Controller
      *
      * @return \think\Response
      */
+    private $obj;
+    public function _initialize()
+    {
+        $this->obj = model("Order");
+    }
+
     public function index()
     {
 //        echo  "order";
+//        print_r($this->obj);
         return $this->fetch();
     }
 
@@ -23,9 +30,9 @@ class Order extends Controller
      *
      * @return \think\Response
      */
-    public function create()
+    public function add()
     {
-        //
+        return $this->fetch();
     }
 
     /**
@@ -36,7 +43,24 @@ class Order extends Controller
      */
     public function save(Request $request)
     {
-        //
+        if(!request()->isPost()){
+            $this->error('请求失败！');
+        }
+        $data = input('post.');
+        $validate = validate('Order');
+
+        if(!$validate->scene('add')->check($data)){
+            return $this->error($validate->getError());
+        }
+        $res = $this->obj->save($data);
+
+        if($res){
+            $this->success("新增成功！");
+        }else{
+            $this->error("新增失败!");
+        }
+
+
     }
 
     /**
