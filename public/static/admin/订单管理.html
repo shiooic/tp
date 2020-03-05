@@ -247,10 +247,10 @@
             <h1>所有订单</h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <!-- <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Simple Tables</li>
-            </ol>
+            </ol> -->
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -267,56 +267,62 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered" style="text-align: center;">
                   <thead>                  
                     <tr>
-                      <th style="">#</th>
+                      <th>
+
+                        <div class="form-check">
+                          <input name="id" class="form-check-input" type="checkbox" value="">
+                          <label class="form-check-label"></label>
+                        </div>
+                      </th>
                       <th>ID</th>
                       <th>产品名</th>
-                      <th style="">数量/价格</th>
+                      <th>数量/价格</th>
+                      <th>收件人</th>
+                      <th>收件电话</th>
+                      <th>收货地址</th>
+                     
+                      <th>快递状态</th>
+                      <th>订单状态</th>
+                      <th>下单IP</th>
+                      <th>下单日期</th>
+                      <th>备注</th>
+                      
+
+                      <th>编辑</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
                       <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                        <div class="form-check">
+                          <input name="id" class="form-check-input" type="checkbox" value="">
+                          <label class="form-check-label"></label>
                         </div>
                       </td>
-                      <td><span class="badge bg-danger">55%</span></td>
-                    </tr>
-                    <tr>
-                      <td>2.</td>
-                      <td>Clean database</td>
+                      <td>1</td>
+                      <td>【套餐1】茅台镇封坛酱酒1箱共6坛198元</td>
+                      <td>1/298</td>
+                      <td>江波</td>
+                      <td>13607085227</td>
+                      <td>江西省南昌市青山湖区文教路77号</td>
+                      <td>德邦快递</td>
+                      <td>等待发货</td>
+                      <td>223.104.10.36</td>
+                      <td>2020/3/5 9:52:06</td>
+                      <td>无</td>
+
+
+
                       <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar bg-warning" style="width: 70%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-warning">70%</span></td>
+                        <a class="" href="#"><i class="fas fa-edit"></i> 编辑 </a>
+                        <a class="" href="#"> <i class="fas fa-save"></i> 保存</a>
+                    
+                    </td>
                     </tr>
-                    <tr>
-                      <td>3.</td>
-                      <td>Cron job running</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-primary" style="width: 30%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-primary">30%</span></td>
-                    </tr>
-                    <tr>
-                      <td>4.</td>
-                      <td>Fix and squish bugs</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-success" style="width: 90%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-success">90%</span></td>
-                    </tr>
+                   
                   </tbody>
                 </table>
               </div>
