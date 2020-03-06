@@ -25,12 +25,14 @@ class Order extends Controller
             'order_status' => $zt
         ];
 
-        $order = $this->obj::where($data)->select();
+        $order = $this->obj::where($data)->paginate(3);
+        $page = $order->render();
         $express_status = config('express_status');
         $order_status = config('order_status');
 //        print_r($order);
         return $this->fetch('',[
                 'order' => $order,
+                'page' => $page,
                 'order_status_s' => $order_status,
                 'express_status_s' => $express_status,
 
@@ -79,15 +81,43 @@ class Order extends Controller
 
     }
 
-    /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function read($id)
+
+    public function search()
     {
-        //
+        $data = input('get.');
+
+        $sdata = [];
+
+        if(!empty($data['start_time']) && !empty($data['end_time']) && strtotime($data['end_time'])> strtotime($data['start_time']))
+        {
+            $sdata['create_time']  = [
+                ['gt', strtotime($data['start_time'])],
+                ['lt', strtotime($data['end_time'])],
+            ];
+        }
+
+        if(!empty($data['name'])){
+            $sdata['product']  = ['like', '%'.$data['name'].'%'];
+        }
+
+//        print_r($sdata);
+
+        $order = $this->obj->where($sdata)->paginate();
+        $page = $order->render();
+        $express_status = config('express_status');
+        $order_status = config('order_status');
+        return $this->fetch('index',[
+                'order' => $order,
+                'page' => $page,
+                'order_status_s' => $order_status,
+                'express_status_s' => $express_status,
+
+            ]
+
+        );
+
+
+
     }
 
     /**
@@ -96,9 +126,9 @@ class Order extends Controller
      * @param  int  $id
      * @return \think\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+
     }
 
     /**
