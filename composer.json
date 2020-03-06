@@ -17,7 +17,8 @@
     ],
     "require": {
         "php": ">=7.0",
-        "topthink/framework": "5.0.*"
+        "topthink/framework": "5.0.*",
+        "phpoffice/phpexcel": "^1.8"
     },
     "autoload": {
         "psr-4": {

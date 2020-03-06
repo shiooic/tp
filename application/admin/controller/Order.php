@@ -145,14 +145,37 @@ class Order extends Controller
         //
     }
 
-    /**
-     * 删除指定资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function delete($id)
+    public function excel()
     {
         //
+        $users =$this->obj->select();     //数据库查询
+        $path = dirname(__FILE__); //找到当前脚本所在路径
+
+        vendor("PHPExcel.PHPExcel"); //方法一
+
+        $PHPExcel = new \PHPExcel();
+        $PHPSheet = $PHPExcel->getActiveSheet();
+        $PHPSheet->setTitle("demo"); //给当前活动sheet设置名称
+        $PHPSheet->setCellValue("A1", "ID")
+            ->setCellValue("B1", "手机")
+            ->setCellValue("C1", "用户名")
+            ->setCellValue("D1", "昵称")
+            ->setCellValue("E1", "结束时间")
+            ->setCellValue("F1", "等级");
+        $i = 2;
+        foreach($users as $data){
+            $PHPSheet->setCellValue("A" . $i, $data['id'])
+                ->setCellValue("B" . $i, $data['username'])
+                ->setCellValue("C" . $i, $data['username'])
+                ->setCellValue("D" . $i, $data['username'])
+                ->setCellValue("E" . $i, $data['username'])
+                ->setCellValue("F" . $i, $data['username']);
+            $i++;
+        }
+
+        $PHPWriter = \PHPExcel_IOFactory::createWriter($PHPExcel, "Excel2007");
+        header('Content-Disposition: attachment;filename="表单数据.xlsx"');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $PHPWriter->save("php://output"); //表示在$path路径下面生成demo.xlsx文件
     }
 }
