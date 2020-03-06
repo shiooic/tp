@@ -128,9 +128,13 @@ class Order extends Controller
      * @param  int  $id
      * @return \think\Response
      */
-    public function edit()
+    public function edit($id)
     {
-
+        $id = intval($id,0);
+        $order = $this->obj->where(['id'=>$id])->find();
+        return $this->fetch('',[
+            'order' => $order,
+        ]);
     }
 
     /**
@@ -140,9 +144,9 @@ class Order extends Controller
      * @param  int  $id
      * @return \think\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
-        //
+
     }
 
     public function excel()
