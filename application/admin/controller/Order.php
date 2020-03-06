@@ -87,22 +87,24 @@ class Order extends Controller
         $data = input('get.');
 
         $sdata = [];
-
+        $search_content = [];
         if(!empty($data['start_time']) && !empty($data['end_time']) && strtotime($data['end_time'])> strtotime($data['start_time']))
         {
             $sdata['create_time']  = [
                 ['gt', strtotime($data['start_time'])],
                 ['lt', strtotime($data['end_time'])],
             ];
-        }
+        };
 
         if(!empty($data['name'])){
-            $sdata['product']  = ['like', '%'.$data['name'].'%'];
+            $search_content['product']  = ['like', '%'.$data['name'].'%'];
+            $search_content['username']  = ['like', '%'.$data['name'].'%'];
+            $search_content['tel']  = ['like', '%'.$data['name'].'%'];
         }
 
 //        print_r($sdata);
 
-        $order = $this->obj->where($sdata)->paginate();
+        $order = $this->obj->where($sdata)->whereOr($search_content)->paginate();
         $page = $order->render();
         $express_status = config('express_status');
         $order_status = config('order_status');
