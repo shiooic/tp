@@ -20,9 +20,23 @@ class Order extends Controller
 
     public function index()
     {
-//        echo  "order";
-//        print_r($this->obj);
-        return $this->fetch();
+        $zt = input('get.order_status', 0, 'intval');
+        $data = [
+            'order_status' => $zt
+        ];
+
+        $order = $this->obj::where($data)->select();
+        $express_status = config('express_status');
+        $order_status = config('order_status');
+//        print_r($order);
+        return $this->fetch('',[
+                'order' => $order,
+                'order_status_s' => $order_status,
+                'express_status_s' => $express_status,
+
+            ]
+
+        );
     }
 
     /**
@@ -47,6 +61,8 @@ class Order extends Controller
             $this->error('请求失败！');
         }
         $data = input('post.');
+        $data['order_ip'] = Request::instance()->ip();
+
         $validate = validate('Order');
 
         if(!$validate->scene('add')->check($data)){
