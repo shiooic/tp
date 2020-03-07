@@ -18,7 +18,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form" method="post" action="{:url('Order/update')}">
+                        <form role="form" method="get" action="{:url('Order/update',['id'=>$order.id])}">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">产品名称</label>

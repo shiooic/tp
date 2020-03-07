@@ -107,7 +107,7 @@
                                     <td>{$vo.remark}</td>
                                     <td>
                                         <a class="" href="{:url('Order/edit',['id'=>$vo.id])}"><i class="fas fa-edit"></i> 编辑 </a>
-                                        <a class="" href="#"> <i class="fas fa-save"></i> 保存</a>
+                                        <a class="" href="{:url('Order/update',['id'=>$vo.id,'order_status'=>1])}"> <i class="fas fa-save"></i> 保存</a>
 
                                     </td>
                                 </tr>

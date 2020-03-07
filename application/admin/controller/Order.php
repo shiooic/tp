@@ -144,8 +144,35 @@ class Order extends Controller
      * @param  int  $id
      * @return \think\Response
      */
-    public function update()
+    public function update($id)
     {
+
+        $order_status = input('get.order_status');
+        //$order_id = input('get.id');
+        if($order_status == 1){
+            $order = $this->obj->where(['id'=>$id])->update(['order_status'=>1]);
+            if($order){
+                $this->success("删除成功！");
+            }else{
+                $this->error("删除失败！");
+            }
+        }
+
+
+        $id = intval($id,0);
+        $data = input('get.');
+        $validate = validate('Order');
+
+        if(!$validate->scene('add')->check($data)){
+            return $this->error($validate->getError());
+        }
+        
+        $order = $this->obj->where(['id'=>$id])->update($data);
+        if($order){
+            $this->success("更新成功");
+        }else{
+            $this->error("更新失败");
+        }
 
     }
 
